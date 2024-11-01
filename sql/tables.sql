@@ -9,7 +9,7 @@ create table if not exists clima_detalhado (
     primary key(id)
 );
 
-create table if not exists clima_resumo_diário (
+create table if not exists clima_resumo_diario (
     id bigint not null auto_increment,
     dia date,
     temperatura_media_geral float not null,
