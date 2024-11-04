@@ -1,6 +1,6 @@
 import json
-from sqlalchemy.orm import sessionmaker 
-from sqlalchemy import create_engine
+from   sqlalchemy.orm import sessionmaker 
+from   sqlalchemy     import create_engine
 
 config = None
 
@@ -16,5 +16,7 @@ conn = f"mysql+pymysql://{config['database']['user']}:{config['database']['pass'
 engine = create_engine(conn)
 
 def get_session():
-    Session = sessionmaker(bind=engine)
-    return Session()
+    return sessionmaker(bind=engine)
+
+def get_api_data():
+    return config['api']
