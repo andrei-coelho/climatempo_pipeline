@@ -1,13 +1,23 @@
 from src.clima_model import *
 from util.config import get_session
 from datetime import datetime, timedelta 
+from logging import getLogger
 
+logger = getLogger()
 
-def save_data_clima(clima:ClimaDetalhado|ClimaResumoDiario):
+def save_data_clima(clima: ClimaDetalhado | ClimaResumoDiario) -> bool:
     session = get_session()
-    session.add(clima)
-    session.commit()
-    session.close()
+    try:
+        session.add(clima)
+        session.commit()
+        res = session.query(ClimaDetalhado)
+        return res is not None
+    except Exception as e:
+        session.rollback() 
+        logger.error(f"save_data_clima - Erro ao salvar o clima: {e}")
+        return False
+    finally:
+        session.close()
 
 def get_rows_clima_detalhado(dia:DateTime):
     
