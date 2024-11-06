@@ -6,7 +6,8 @@ from logging import getLogger
 logger = getLogger()
 
 def save_data_clima(clima: ClimaDetalhado | ClimaResumoDiario) -> bool:
-    session = get_session()
+    Session = get_session()
+    session = Session()
     try:
         session.add(clima)
         session.commit()
@@ -21,7 +22,8 @@ def save_data_clima(clima: ClimaDetalhado | ClimaResumoDiario) -> bool:
 
 def get_rows_clima_detalhado(dia:DateTime):
     
-    session = get_session()
+    Session = get_session()
+    session = Session()
     
     dia_inicio = datetime.combine(dia, datetime.min.time())
     dia_fim = datetime.combine(dia, datetime.max.time())

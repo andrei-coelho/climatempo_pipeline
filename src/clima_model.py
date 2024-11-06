@@ -15,7 +15,12 @@ class ClimaDetalhado(Base):
 
 
 class ClimaResumoDiario(Base):
-    __tablename__ = "clima_resumido_diario"
+    
+    def __init__(self, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+    __tablename__ = "clima_resumo_diario"
     id = Column(BigInteger, primary_key=True)
     dia = Column(Date, nullable=False)
     temperatura_media_geral = Column(Float, nullable=False)
